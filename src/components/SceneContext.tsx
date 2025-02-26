@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState, ReactNode, useRef, useEffect } from 'react';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
 
 interface SceneContextType {
   focusedCard: number | null;

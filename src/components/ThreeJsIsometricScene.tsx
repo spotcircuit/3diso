@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Text, OrbitControls, PerspectiveCamera, Html } from '@react-three/drei';
-import { useControls, folder } from 'leva';
+import { useControls } from 'leva';
 import * as THREE from 'three';
 
 // Business process steps data - positioned much higher
@@ -94,7 +94,7 @@ function ProcessCard({ data, index, onClick, isSelected }) {
     // Animate card up and down
     if (!isSelected) {
       // Card going up
-      let startTime = Date.now();
+      const startTime = Date.now();
       const animateUp = () => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / 300, 1); // 300ms animation
@@ -109,7 +109,7 @@ function ProcessCard({ data, index, onClick, isSelected }) {
       requestAnimationFrame(animateUp);
     } else {
       // Card going down
-      let startTime = Date.now();
+      const startTime = Date.now();
       const animateDown = () => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / 300, 1); // 300ms animation
@@ -211,7 +211,6 @@ function IsometricGrid() {
 function Particles({ count = 100 }) {
   const mesh = useRef();
   const { size, viewport } = useThree();
-  const aspect = size.width / viewport.width;
   
   // Generate random positions for particles
   const dummy = new THREE.Object3D();
@@ -230,7 +229,7 @@ function Particles({ count = 100 }) {
   // Animate particles
   useFrame(() => {
     particles.forEach((particle, i) => {
-      let { position, scale } = particle;
+      const { position, scale } = particle;
       dummy.position.set(position[0], position[1], position[2]);
       dummy.scale.set(scale, scale, scale);
       dummy.rotation.x = dummy.rotation.y += 0.01;

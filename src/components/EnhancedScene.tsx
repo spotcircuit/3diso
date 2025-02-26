@@ -67,8 +67,6 @@ function Scene() {
   const { 
     viewSettings, 
     updateViewSettings, 
-    focusedCard, 
-    setFocusedCard, 
     isFocusMode, 
     isDetailMode,
     isCtrlPressed,
@@ -79,7 +77,6 @@ function Scene() {
   const sceneRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePosition, setLastMousePosition] = useState({ x: 0, y: 0 });
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isPanning, setIsPanning] = useState(false);
 
   // Load animation
@@ -228,7 +225,7 @@ function Scene() {
       rotateX(${viewSettings.elevation}deg)
       rotateY(${viewSettings.rotation}deg)
     `,
-    transformStyle: 'preserve-3d' as 'preserve-3d',
+    transformStyle: 'preserve-3d',
     transformOrigin: 'center center',
     transitionProperty: 'transform',
     transitionDuration: isDragging ? '0s' : '0.5s',

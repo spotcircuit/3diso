@@ -1,5 +1,12 @@
-import ThreeDIsometricScene from "@/components/3DIsometricScene";
+import FloatingCardScene from "@/components/FloatingCardScene";
+import { NextPage } from 'next';
 
-export default function Home() {
-  return <ThreeDIsometricScene />;
-}
+const Home: NextPage = () => {
+  return (
+    <main>
+      <FloatingCardScene />
+    </main>
+  );
+};
+
+export default Home;

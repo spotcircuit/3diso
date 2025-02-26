@@ -37,8 +37,7 @@ export default function EnhancedCard({
     setIsDetailMode,
     isCtrlPressed,
     cardRotation,
-    setCardRotation,
-    draggable
+    setCardRotation
   } = useContext(SceneContext);
   
   const cardRef = useRef<HTMLDivElement>(null);
@@ -56,7 +55,6 @@ export default function EnhancedCard({
   
   const isFocused = focusedCard === id;
   const isUnfocused = focusedCard !== null && focusedCard !== id;
-  const [transitionStage, setTransitionStage] = useState(0); // 0: initial, 1: up, 2: spinning
   
   // Generate mock details based on the card's id
   const cardDetails = [
@@ -73,7 +71,7 @@ export default function EnhancedCard({
     if (isDetailMode || isDraggingCard) return; // No floating in detail mode or while dragging
     
     let animationFrameId: number;
-    let startTime = Date.now();
+    const startTime = Date.now();
     
     const animateFloat = () => {
       const elapsed = Date.now() - startTime;
@@ -102,7 +100,7 @@ export default function EnhancedCard({
     if (!isSpinning) return;
     
     let animationFrameId: number;
-    let startTime = Date.now();
+    const startTime = Date.now();
     
     const animateSpin = () => {
       const elapsed = Date.now() - startTime;
@@ -188,7 +186,7 @@ export default function EnhancedCard({
       }
     };
     
-    const handleMouseUp = (e: MouseEvent) => {
+    const handleMouseUp = () => {
       if (isDraggingCard) {
         // Check if this was a short tap/click or an actual drag
         const dragDuration = Date.now() - clickStartTime;
@@ -202,13 +200,11 @@ export default function EnhancedCard({
           // handle as a click
           if (!isFocused) {
             setFocusedCard(id);
-            setTransitionStage(1); // Going up
             
             // Start spinning after a delay
             setTimeout(() => {
               setIsSpinning(true);
               setSpinDirection(1); // Start spinning clockwise
-              setTransitionStage(2); // Spinning
             }, 600);
           }
         }
@@ -224,7 +220,7 @@ export default function EnhancedCard({
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDraggingCard, dragStart]);
+  }, [isDraggingCard, dragStart, clickStartTime, id, isDragging, isFocused, isSpinning, setFocusedCard]);
 
   // Allow user to change spin direction by clicking on a spinning card
   const handleSpinClick = (e: React.MouseEvent) => {

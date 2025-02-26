@@ -12,7 +12,6 @@ export default function AdvancedControls({ inMovableModule = false }: AdvancedCo
     viewSettings, 
     updateViewSettings, 
     resetViewSettings,
-    focusedCard,
     setFocusedCard,
     isFocusMode,
     isDetailMode,
